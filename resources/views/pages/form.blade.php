@@ -495,12 +495,12 @@ Tableau De Bord/{{$user}}
 			}
         });
 
-        $(function(){
+       $(function(){
             $.datepicker.regional['fr'] = {
-		closeText: 'Fermer',
-		prevText: '&#x3c;Préc',
-		nextText: 'Suiv&#x3e;',
-		currentText: 'Aujourd\'hui',
+		//closeText: 'Fermer',
+		//prevText: '&#x3c;Préc',
+		//nextText: 'Suiv&#x3e;',
+		//currentText: 'Aujourd\'hui',
 		monthNames: ['Janvier','Fevrier','Mars','Avril','Mai','Juin',
 		'Juillet','Aout','Septembre','Octobre','Novembre','Decembre'],
 		monthNamesShort: ['Jan','Fev','Mar','Avr','Mai','Jun',
@@ -511,12 +511,12 @@ Tableau De Bord/{{$user}}
 		weekHeader: 'Sm',
 		dateFormat: 'dd-mm-yy',
 		firstDay: 1,
-		isRTL: false,
-		showMonthAfterYear: false,
-		yearSuffix: '',
-		minDate: 0,
-		maxDate: '+12M +0D',
-		numberOfMonths: 2,
+		//isRTL: false,
+		//showMonthAfterYear: false,
+		//yearSuffix: '',
+		//minDate: 0,
+		//maxDate: '+12M +0D',
+		//numberOfMonths: 2,
 		};
 	$.datepicker.setDefaults($.datepicker.regional['fr']);
             $("#date").datepicker({
@@ -535,7 +535,6 @@ return [false, ''];
 }
             }).datepicker("setDate",'0');
         });
-
     });
 
     
