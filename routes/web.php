@@ -15,25 +15,27 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/charge', function () {
-    return view('pages.charge');
-});
-
-Route::get('/cr', 'CrController@index');
-
 Auth::routes();
 
 Route::middleware('auth')->group(function(){
 
-    Route::resource('Rapports', 'RapportController');    
-    
+    Route::resource('Rapports', 'RapportController');
+
+    Route::get('Rapport/unite', 'RapportController@users')->name('Rapports.users');
+
+    Route::get('Rapport/{type}/{date}', 'RapportController@ShowRapport')->name('Rapports.showRap');
+
     Route::resource('Charges', 'ChargeController');
+
+    Route::resource('Crs', 'CrController');
 
     Route::get('/home', 'HomeController@index')->name('home');
 
-    Route::get('/test', 'RapportController@MAJ'); 
+    Route::get('/test', 'RapportController@MAJ');
 
-    Route::get('/excel', 'RapportController@toExcel');
+    Route::get('/imprimer/{type}/{date}', 'RapportController@toExcel')->name('Rapports.toExcel');
+
+    Route::post('/filter', 'RapportController@filter');
 
 
 

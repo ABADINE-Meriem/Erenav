@@ -1,0 +1,317 @@
+body{
+
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+    background-image: url('/img/img3.jpg'); 
+    background-repeat: no-repeat; 
+    background-size: cover; 
+    background-position: center center; 
+    height: 100vh; 
+    width:100%;
+}
+/*style for userinterface*/
+.table-wrapper {
+    background: #fff;
+    padding: 20px 25px;
+    margin: 30px auto;
+    border-radius: 3px;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.5);
+}
+.table-wrapper .btn {
+    float: right;
+    color: #333;
+    background-color: #fff;
+    border-radius: 4px;
+    border: none;
+    outline: none !important;
+    margin-left: 10px;
+}
+.table-wrapper .btn:hover {
+    color: #333;
+    background: #f2f2f2;
+}
+.table-wrapper .btn.btn-primary {
+    color: #fff;
+    background: #93d6e2;
+}
+.table-wrapper .btn.btn-primary:focus {
+    background: #93d6e2;
+}
+.table-wrapper .btn.btn-info:focus {
+    color:black;
+    background: #f2f2f2;
+}
+
+.table-title .btn {
+    font-size: 13px;
+    border: none;
+}
+.table-title .btn i {
+    float: left;
+    font-size: 21px;
+    margin-right: 5px;
+}
+.table-title .btn span {
+    float: left;
+    margin-top: 2px;
+}
+.table-title {
+    color: #fff;
+    /*background: #4b5366;*/
+    /*background: rgb(0,212,255);
+    background: linear-gradient(113deg, rgba(0,212,255,1) 0%, rgba(1,186,238,1) 10%, rgba(9,9,121,1) 79%, rgba(9,17,126,1) 100%, rgba(0,212,255,1) 100%, rgba(9,25,131,1) 100%);	*/
+    background: rgb(158,183,212);
+    background: -moz-linear-gradient(124deg, rgba(158,183,212,1) 8%, rgba(147,214,226,1) 17%, rgba(151,208,224,1) 24%, rgba(96,146,198,1) 45%, rgba(2,14,94,1) 72%, rgba(8,15,105,1) 100%);
+    background: -webkit-linear-gradient(124deg, rgba(158,183,212,1) 8%, rgba(147,214,226,1) 17%, rgba(151,208,224,1) 24%, rgba(96,146,198,1) 45%, rgba(2,14,94,1) 72%, rgba(8,15,105,1) 100%);
+    background: linear-gradient(124deg, rgba(158,183,212,1) 8%, rgba(147,214,226,1) 17%, rgba(151,208,224,1) 24%, rgba(96,146,198,1) 45%, rgba(2,14,94,1) 72%, rgba(8,15,105,1) 100%);
+    padding: 16px 25px;
+    margin: -20px -25px 10px;
+    border-radius: 3px 3px 0 0;
+}
+.table-title h2 {
+    margin: 5px 0 0;
+    font-size: 24px;
+}
+.table-filter .filter-group {
+    float: right;
+    margin-left: 5px;
+}
+.table-filter input, .table-filter select {
+    height: 34px;
+    border-radius: 3px;
+    border-color: #ddd;
+    box-shadow: none;
+}
+.table-filter {
+    padding: 5px 0 15px;
+    border-bottom: 1px solid #e9e9e9;
+    margin-bottom: 0px;
+}
+.table-filter .btn {
+    float: right;
+    height: 34px;
+
+}
+.table-filter label {
+    font-weight: normal;
+    margin-left: 10px;
+}
+.table-filter select, .table-filter input {
+    display: inline-block;
+    margin-left: 5px;
+}
+.table-filter input {
+    width: 200px;
+    display: inline-block;
+}
+.filter-group select.form-control {
+    width: 110px;
+}
+.filter-icon {
+    float: right;
+    margin-top: 7px;
+}
+.filter-icon i {
+    font-size: 18px;
+    opacity: 0.7;
+}
+table.table tr th, table.table tr td {
+    border-color: #e9e9e9;
+    padding: 12px 15px;
+    vertical-align: middle;
+}
+/*
+table.table tr th:first-child {
+    width: 60px;
+}
+table.table tr th:last-child {
+    width: 80px;
+}
+*/
+table.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #fcfcfc;
+}
+table.table-striped.table-hover tbody tr:hover {
+    background: #f5f5f5;
+}
+table.table th i {
+    font-size: 13px;
+    margin: 0 5px;
+    cursor: pointer;
+}
+table.table td a {
+    font-weight: bold;
+    color: #566787;
+    display: inline-block;
+    text-decoration: none;
+}
+table.table td a:hover {
+    color: #93d6e2;
+}
+table.table td a.voir {
+    width: 30px;
+    height: 30px;
+    color: #93d6e2;
+    border: 0px solid;
+   /* border-radius: 30px;*/
+    text-align: center;
+}
+table.table td a.voir i {
+    font-size: 22px;
+   /* margin: 2px 0 0 1px; */
+}
+
+.pagination {
+    float: right;
+    margin: 0 0 5px;
+}
+.pagination li a {
+    border: none;
+    font-size: 13px;
+    min-width: 30px;
+    min-height: 30px;
+    color: #999;
+    margin: 0 2px;
+    line-height: 30px;
+    border-radius: 1px !important;
+    text-align: center;
+    padding: 0 6px;
+
+}
+.pagination li a:hover {
+    color: #666;
+}
+.pagination li.active a{
+    background: #93d6e2;
+}
+.pagination li.active a:hover {
+    background: #93d6e2;
+}
+.pagination li.disabled i {
+    color: #ccc;
+}
+.pagination li i {
+    font-size: 16px;
+    padding-top: 6px
+}
+
+.hint-text {
+    float: left;
+    margin-top: 10px;
+    font-size: 13px;
+}
+
+.pagination a.active {
+    background-color:#93d6e2;
+    color: white;
+  }
+
+/*style for produit and charge */
+.container-fluid{
+    background: rgb(158,183,212);
+    background: -moz-linear-gradient(124deg, rgba(158,183,212,1) 8%, rgba(147,214,226,1) 17%, rgba(151,208,224,1) 24%, rgba(96,146,198,1) 45%, rgba(2,14,94,1) 72%, rgba(8,15,105,1) 100%);
+    background: -webkit-linear-gradient(124deg, rgba(158,183,212,1) 8%, rgba(147,214,226,1) 17%, rgba(151,208,224,1) 24%, rgba(96,146,198,1) 45%, rgba(2,14,94,1) 72%, rgba(8,15,105,1) 100%);
+    background: linear-gradient(124deg, rgba(158,183,212,1) 8%, rgba(147,214,226,1) 17%, rgba(151,208,224,1) 24%, rgba(96,146,198,1) 45%, rgba(2,14,94,1) 72%, rgba(8,15,105,1) 100%);
+    border-radius: 3px;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.75);
+}
+#date{
+    border: 0;
+    outline: 0;
+    border-bottom: 2px solid white;
+    border-radius: 0%;
+    background:transparent;
+    color: white;
+}
+
+/* DatePicker Container */
+.ui-datepicker {
+	width: 220px;
+	height: auto;
+    margin: 5px auto 0;
+	font: 9pt Arial, sans-serif;
+	-webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .5);
+	-moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .5);
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .5);
+
+}
+.ui-datepicker-header select{
+
+    border: 0;
+    outline: 0;
+    background:transparent;
+    color: white;
+}
+
+.ui-datepicker a {
+	text-decoration: none;
+}
+/* DatePicker Table */
+.ui-datepicker table {
+	width: 100%;
+}
+.ui-datepicker-header {
+	background: rgb(153,199,222);
+    background: -moz-linear-gradient(124deg, rgba(153,199,222,1) 14%, rgba(147,214,226,1) 17%, rgba(31,87,138,1) 39%, rgba(8,22,115,1) 58%, rgba(147,214,226,1) 81%, rgba(158,183,212,1) 92%);
+    background: -webkit-linear-gradient(124deg, rgba(153,199,222,1) 14%, rgba(147,214,226,1) 17%, rgba(31,87,138,1) 39%, rgba(8,22,115,1) 58%, rgba(147,214,226,1) 81%, rgba(158,183,212,1) 92%);
+    background: linear-gradient(124deg, rgba(153,199,222,1) 14%, rgba(147,214,226,1) 17%, rgba(31,87,138,1) 39%, rgba(8,22,115,1) 58%, rgba(147,214,226,1) 81%, rgba(158,183,212,1) 92%);
+	color: #e0e0e0;
+	font-weight: bold;
+	-webkit-box-shadow: inset 0px 1px 1px 0px rgba(250, 250, 250, 2);
+	-moz-box-shadow: inset 0px 1px 1px 0px rgba(250, 250, 250, .2);
+	box-shadow: inset 0px 1px 1px 0px rgba(250, 250, 250, .2);
+	text-shadow: 1px -1px 0px #000;
+	filter: dropshadow(color=#000, offx=1, offy=-1);
+	line-height: 30px;
+	border-width: 1px 0 0 0;
+	border-style: solid;
+	border-color: #111;
+}
+.ui-datepicker-title {
+	text-align: center;
+}
+
+.ui-datepicker .ui-datepicker-prev,
+.ui-datepicker .ui-datepicker-next {
+    background: transparent;
+    border: 0px;
+}
+
+.ui-datepicker .ui-datepicker-prev-hover,
+.ui-datepicker .ui-datepicker-next-hover {
+
+}
+
+
+.ui-datepicker th {
+	text-transform: uppercase;
+	font-size: 6pt;
+	padding: 5px 0;
+	color: #666666;
+	text-shadow: 1px 0px 0px #fff;
+	filter: dropshadow(color=#fff, offx=1, offy=0);
+}
+.ui-datepicker tbody td {
+	padding: 0;
+	border-right: 1px solid #bbb;
+}
+.ui-datepicker tbody td:last-child {
+	border-right: 0px;
+}
+.ui-datepicker tbody tr {
+	border-bottom: 1px solid #bbb;
+}
+.ui-datepicker tbody tr:last-child {
+	border-bottom: 0px;
+}
+.ui-datepicker td span, .ui-datepicker td a {
+	display: inline-block;
+	font-weight: bold;
+	text-align: center;
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	color: #666666;
+	text-shadow: 1px 1px 0px #fff;
+	filter: dropshadow(color=#fff, offx=1, offy=1);
+}

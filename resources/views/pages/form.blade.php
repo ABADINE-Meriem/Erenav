@@ -8,11 +8,13 @@ Tableau De Bord/{{$user}}
 
 @section('content')
     <!--debut code-->
-    <div class="container-fluid">
+    <div class="container-fluid col-lg-10 offset-lg-1">
         <div class="row">
             <div class="col-md-12">
-                  <h1 class="d-flex justify-content-center mb-5">Rapport Mensuel de l'Unite {{ $user }}</h1>
-
+                <div class="d-flex">
+                    <div class="d-flex  mb-6 text-white"> <h3>Rapport de produits de  l'Unité {{ $user }}</h3> </div>
+                </div>
+            <div class=" pre-scrollable" style="max-height: 77vh">
                   @if (Session::has('success'))
 	                <div class="alert alert-success">{{ Session::get('success') }}</div>
                   @endif
@@ -39,16 +41,11 @@ Tableau De Bord/{{$user}}
 
                     {{ csrf_field() }}
 
-                    <div class="card mb-5">
-                        <h5 class="card-header">
-                            <div class="input-group-prepend d-flex justify-content-between">
-                            <label for="" class="col-md-4 col-form-label text-md-left">Date</label>
-                            <input id="date" type="text" class="form-control ml-5" name="date">
-                            </div>
-                        </h5>
+                    <div class="p-2 ml-auto col-md-2">
+                        <input id="date" type="text" class="form-control" name="date" readonly>
                     </div>    
 
-                    <div class="card mb-5">
+                    <div class="card mb-2">
                         <h5 class="card-header">
                             <div class="input-group-prepend d-flex justify-content-between">
                             <p>Ventes de marchandises, produits fabriqués, prestations de service et produits annexes</p>
@@ -124,7 +121,7 @@ Tableau De Bord/{{$user}}
                         
 			        </div>
 
-                    <div class="card mb-5">
+                    <div class="card mb-2">
                         <h5 class="card-header">
                             <div class="input-group-prepend d-flex justify-content-between">
                             <p>Production stockée ou déstockée</p>
@@ -152,7 +149,7 @@ Tableau De Bord/{{$user}}
                         
 			        </div>
 
-                    <div class="card mb-5">
+                    <div class="card mb-2">
                         <h5 class="card-header">
                             <div class="input-group-prepend d-flex justify-content-between">
                             <p>Production immobilisée</p>
@@ -180,7 +177,7 @@ Tableau De Bord/{{$user}}
                         
 			        </div>
 
-                    <div class="card mb-5">
+                    <div class="card mb-2">
                         <h5 class="card-header">
                             <div class="input-group-prepend d-flex justify-content-between">
                             <p>Subventions d'exploitation</p>
@@ -208,7 +205,7 @@ Tableau De Bord/{{$user}}
                         
 			        </div>
 
-                    <div class="card mb-5">
+                    <div class="card mb-2">
                         <h5 class="card-header">
                             <div class="input-group-prepend d-flex justify-content-between">
                             <p>Autres produits opérationnels</p>
@@ -278,7 +275,7 @@ Tableau De Bord/{{$user}}
                         
 			        </div>
 
-                    <div class="card mb-5">
+                    <div class="card mb-2">
                         <h5 class="card-header">
                             <div class="input-group-prepend d-flex justify-content-between">
                             <p>Produits financiers</p>
@@ -341,7 +338,7 @@ Tableau De Bord/{{$user}}
                         
 			        </div>
 
-                    <div class="card mb-5">
+                    <div class="card mb-2">
                         <h5 class="card-header">
                             <div class="input-group-prepend d-flex justify-content-between">
                             <p>Eléments extraordinaires</p>
@@ -358,7 +355,7 @@ Tableau De Bord/{{$user}}
                         </div>        
 			        </div>
 
-                    <div class="card mb-5">
+                    <div class="card mb-2">
                         <h5 class="card-header">
                             <div class="input-group-prepend d-flex justify-content-between">
                             <p>Reprises sur pertes de valeur et provisions</p>
@@ -393,14 +390,13 @@ Tableau De Bord/{{$user}}
                         
 			        </div>
 
-                    <div class="card mb-5">
-                        <h5 class="card-header d-flex justify-content-center">
-                            <button type="submit" class="btn btn-success col-md-4">Valider</button>
-                        </h5>        
-			        </div>
+                    <div class="d-flex justify-content-center mb-3">
+                            <button type="submit" class="btn btn-lg col-md-2 btn-light">Valider</button>
+                    </div>
                   
                     <input type="hidden" id="unite" name="unite" value="{{$user}}">
                   </form>
+                </div>
             </div>
         </div>
     </div>
@@ -495,29 +491,28 @@ Tableau De Bord/{{$user}}
 			}
         });
 
-       $(function(){
-            $.datepicker.regional['fr'] = {
-		//closeText: 'Fermer',
-		//prevText: '&#x3c;Préc',
-		//nextText: 'Suiv&#x3e;',
-		//currentText: 'Aujourd\'hui',
-		monthNames: ['Janvier','Fevrier','Mars','Avril','Mai','Juin',
-		'Juillet','Aout','Septembre','Octobre','Novembre','Decembre'],
-		monthNamesShort: ['Jan','Fev','Mar','Avr','Mai','Jun',
-		'Jul','Aou','Sep','Oct','Nov','Dec'],
-		dayNames: ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'],
-		dayNamesShort: ['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'],
-		dayNamesMin: ['Di','Lu','Ma','Me','Je','Ve','Sa'],
-		weekHeader: 'Sm',
-		dateFormat: 'dd-mm-yy',
-		firstDay: 1,
-		//isRTL: false,
-		//showMonthAfterYear: false,
-		//yearSuffix: '',
-		//minDate: 0,
-		//maxDate: '+12M +0D',
-		//numberOfMonths: 2,
-		};
+$(function(){
+    $.datepicker.regional['fr'] = {
+    closeText: 'Fermer',
+    prevText: '&#x3c;Préc',
+    nextText: 'Suiv&#x3e;',
+    currentText: 'Aujourd\'hui',
+    monthNames: ['Janvier','Fevrier','Mars','Avril','Mai','Juin',
+    'Juillet','Aout','Septembre','Octobre','Novembre','Decembre'],
+    monthNamesShort: ['Jan','Fev','Mar','Avr','Mai','Jun',
+    'Jul','Aou','Sep','Oct','Nov','Dec'],
+    dayNames: ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'],
+    dayNamesShort: ['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'],
+    dayNamesMin: ['Di','Lu','Ma','Me','Je','Ve','Sa'],
+    weekHeader: 'Sm',
+    dateFormat: 'dd-mm-yy',
+    firstDay: 1,
+    isRTL: false,
+    showMonthAfterYear: false,
+    yearSuffix: '',
+    minDate: 0,
+    maxDate: '+12M +0D',
+    };
 	$.datepicker.setDefaults($.datepicker.regional['fr']);
             $("#date").datepicker({
                 changeMonth:true,

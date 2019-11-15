@@ -14,6 +14,7 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class RapportController extends Controller
 {
+    private static $iD=0;
     /**
      * Display a listing of the resource.
      *
@@ -21,7 +22,51 @@ class RapportController extends Controller
      */
     public function index()
     {
-        //
+        return view('pages.tabbord');
+    }
+
+        /**
+     * Display a listing of the resource of rapport unite.
+     */
+
+    public function users()
+    {
+        $date =DB::table('ProduitCharges')
+                ->select("date")
+                ->distinct();
+
+        $date1 = DB::table('crs')
+                ->select("date")
+                ->union($date)
+                ->distinct()
+                ->get();
+
+
+        $user =Auth::user();
+
+        $unite = $user->getUnite();
+
+        $data = DB::table('ProduitCharges')
+                ->select("date","unite","tableName")
+                ->where('unite', '=', $unite)
+                ->distinct();
+                
+
+        $data1 = DB::table('crs')
+                ->select("date","unite","tableName")
+                ->where('unite', '=', $unite)
+                ->union($data)
+                ->distinct()
+                ->simplePaginate(5); 
+
+        return view('pages.userinterface')->with("rapports",$data1)->with("dates",$date1)->with("filter",false);
+    }
+
+    public static function getID(){
+
+        static::$iD = static::$iD+1;
+
+        return static::$iD;
     }
 
     /**
@@ -94,6 +139,41 @@ class RapportController extends Controller
         return true;
     }
 
+        /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @param  int  $id1
+     * @return \Illuminate\Http\Response
+     */
+    public function ShowRapport($id , $id1)
+    {
+
+        $unite =Auth::user()->getUnite();
+
+        if ($id==="cr") {
+            $data = DB::table('Crs')
+				   -> where([
+                            ['date', '=', $id1],['unite', '=', $unite],
+                         ])->distinct()->get();
+
+        return view('pages.showrapport')->with("crs",$data)->with("type",$id)->with("date",$id1);                 
+        } 
+
+        if ($id==="produit") {
+           $this->MAJ();
+        }
+        else{
+            app('app\Http\Controllers\ChargeController')->MAJ();
+        }
+        $data = DB::table('ProduitCharges')
+				   -> where([
+                   ['tableName', '=' ,$id], ['date', '=', $id1],['unite', '=', $unite],
+                         ])->distinct()->get();
+
+        return view('pages.showrapport')->with("rapports",$data)->with("type",$id)->with("date",$id1)->with("crs",array());
+    }
+
     /**
      * Display the specified resource.
      *
@@ -144,7 +224,7 @@ class RapportController extends Controller
        $somme = DB::table('ProduitCharges')
 		           ->select(DB::raw('SUM(montant)'))
 				   -> where([
-                   ['cptes', '>=' ,$borne_inf], ['cptes', '<', $borne_sup], 
+                   ['cptes', '>=' ,$borne_inf], ['cptes', '<=', $borne_sup], 
                          ])->get()->toArray();	
 
        $array =  json_decode(json_encode($somme), true);
@@ -248,16 +328,16 @@ class RapportController extends Controller
     
  }
 
- public function toExcel()
+ public function toExcel($type,$date)
  {
-    $tableName="produit";
+    /*$tableName="produit";*/
 
     $unite =Auth::user()->getUnite();
 
     $produits = DB::table('ProduitCharges')->where([
-        ['date', '=', '2019-10-30'],
+        ['date', '=', $date],
         ['unite', '=', $unite],
-        ['tableName', '=', $tableName],
+        ['tableName', '=', $type],
     ])->get();
 
 
@@ -265,7 +345,7 @@ class RapportController extends Controller
 
     $array = array(array("Cptes", "DESIGNATION","MONTANT"));
 
-    for ($i=0; $i < count($data); $i++) { 
+    for ($i=0; $i < count($data); $i++) {
 
         if ($data[$i]["montant"]==0) {
             $data[$i]["montant"] ="0.00";
@@ -275,14 +355,65 @@ class RapportController extends Controller
     $file_name= 'Rapport'.$data[0]["date"];
 
     Excel::create($file_name, function($excel) use($array) {
-    
+
         $excel->sheet('5 produit', function($sheet) use($array) {
-    
+
             $sheet->fromArray($array, null, 'A1', false, false);
-    
+
         });
-    
+
     })->export('xls');
  }
+
+    public function filter(Request $request){
+
+        if ($request->date ==="All" && $request->type ==="All") {
+
+            return redirect(route('Rapports.users'));
+        }
+
+        $user =Auth::user();
+
+        $unite = $user->getUnite();
+
+        $date =DB::table('ProduitCharges')
+                    ->select("date")
+                    ->distinct();
+
+        $date1 = DB::table('crs')
+                    ->select("date")
+                    ->union($date)
+                    ->distinct()
+                    ->get();
+
+        if ($request->type ==="cr") {
+                
+        $data1 = DB::table('crs')
+                ->select("date","unite","tableName")
+                ->where([
+                    ['date', '=', $request->date],
+                    ['unite', '=', $unite],
+                ])
+                ->distinct()
+                ->simplePaginate(5);
+
+            return view('pages.userinterface')->with("rapports",$data1)->with("dates",$date1)->with("filter",true);
+
+        } else {
+        $data1 = DB::table('ProduitCharges')
+                ->select("date","unite","tableName")
+                ->where([
+                    ['date', '=', $request->date],
+                    ['unite', '=', $unite],
+                    ['tableName', '=', $request->type],
+                ])
+                ->distinct()
+                ->simplePaginate(5);
+
+            return view('pages.userinterface')->with("rapports",$data1)->with("dates",$date1)->with("filter",true);
+        }
+        
+    }
+
  
 }
