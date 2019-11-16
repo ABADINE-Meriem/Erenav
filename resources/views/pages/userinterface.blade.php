@@ -22,6 +22,12 @@
            </div>
        </div>
 
+    @if (Session::has('success'))
+	                <div class="alert alert-success">{{ Session::get('success') }}</div>
+    @endif
+    @if (Session::has('errors'))
+	                <div class="alert alert-warning">{{ Session::get('errors') }}</div>
+    @endif
     @if(count($dates)!=0)
        <div class="table-filter">
            <div class="row">
@@ -65,7 +71,7 @@
                        <th class="th-lg" colspan="2"> </th>
                    </tr>
              </thead>
-             <tbody>
+             <tbody id="table_body">
              
              @foreach($rapports as $rapport)
                    <tr>
@@ -92,5 +98,26 @@
 </div>
 </div>
 
+<script>
+$(document).ready(function() {
+
+    $('#table_body td:nth-child(2)').each( function(){
+
+        d =new Date($(this).text());
+
+        var month = d.getMonth();
+
+        var year = d.getFullYear();
+
+        const monthNames = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
+
+        var month = monthNames[month];
+
+        var dateStr = month + " " + year;
+
+        $(this).html(dateStr);
+});
+});
+</script>
 
 @endsection

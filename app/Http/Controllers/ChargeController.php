@@ -43,10 +43,32 @@ class ChargeController extends Controller
      */
     public function store(ChargeRequest $request)
     {
+
+        $date = $request->date;
+
+        $french_months = array('janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre');
+
+        $months = array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
+
+        $date = str_replace($french_months, $months, strtolower($date));
+
+        $date= date('Y-m-01', strtotime($date));
+
         $tableName="charge";
+
         $user =Auth::user();
 
-        $date = "2019-10-30 15:22:22";
+        $charges = DB::table('ProduitCharges')
+				   -> where([
+                   ['date', '=' ,$date], ['tableName', '=', $tableName], ['unite', '=', $user->getUnite()],
+                         ])->get()->toArray();
+
+        if (count($charges)!=0) {
+
+            session()->flash('errors','Rapport existe déjà');
+
+            return redirect(route('Rapports.users'));
+        } 
 
        DB::table('ProduitCharges')->insert([
             ['cptes'=>$request->cpt60,'designation'=>$request->des1,'montant'=>0,'date'=>"2019-10-30 15:22:22",'tableName'=>$tableName,'unite'=>$user->getUnite()],
@@ -119,7 +141,9 @@ class ChargeController extends Controller
 
 
         ]);
-        return true;
+        session()->flash('success','Rapport ajouté');
+
+        return redirect(route('Rapports.users'));
     }
 
     /**
