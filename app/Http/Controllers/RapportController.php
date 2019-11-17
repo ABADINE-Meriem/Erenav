@@ -26,6 +26,54 @@ class RapportController extends Controller
      */
     public function index()
     {
+            $query = DB::table('crs as t')
+            ->join('crs as c', 'c.date', '=', DB::raw('(t.date -1)'))
+            ->select('t.date as date','c.date as datepase')
+            ->distinct()
+            ->get();
+            
+            $array =  json_decode(json_encode($query), true);
+
+            for ($i=0; $i < count($array) ; $i++) { 
+
+                if (count($array[$i])==2) {
+
+                    $data =DB::table('tableaubord')
+                            ->select('*')
+                            ->where([
+                                ["moispasse","=",$array[$i]['datepase']],["moisactuele","=",$array[$i]['date']],
+                            ])
+                            ->get();
+                    if (count($data)==0) {        
+                    $data1 = DB::table('crs')
+                           ->select('*')
+                           ->where("date","=",$array[$i]['date'])
+                           ->get();
+
+                    $data2 = DB::table('crs')
+                           ->select('*')
+                           ->where("date","=",$array[$i]['datepase'])
+                           ->get();
+                    
+                    DB::table('CRs')->insert([
+                     'agregats'=>'Vente de Marchandises',
+                     'cptes'=>'700',
+                     'moispasse'=>$array[$i]['datepase'],
+                     'moisactuele'=>$array[$i]['date'],
+                     'ecartvaleur'=>$array[$i]['unite'],
+                     'evolution'=>$array[$i]['unite'],
+                     'cumulpasse'=>$array[$i]['unite'],
+                     'cumulactuele'=>$array[$i]['unite'],
+                     'cumulecartvaleur'=>$array[$i]['unite'],
+                     'cumulevolution'=>$array[$i]['unite'],
+                     'unite'=>$array[$i]['unite']
+                    ]);       
+
+                    dd($data2);  
+                }     
+                }
+
+            }
         return view('pages.tabbord');
     }
 

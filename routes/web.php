@@ -11,6 +11,8 @@
 |
 */
 
+Route::get('/cr', 'CrController@index');
+
 Route::get('/', function () {
     return view('welcome');
 });
